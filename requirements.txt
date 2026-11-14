@@ -2,3 +2,5 @@ tkinter
 xarray
 numpy
 matplotlib
+os
+wget

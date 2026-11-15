@@ -10,8 +10,9 @@ def downloadFile():
     print("test")
 
 class WindowApplication(Tk):
-    def __init__(self):
+    def __init__(self, outputs):
         super().__init__()
+        self.outputs = outputs
         self.geometry('550x300')
         self.title("CSEF Viewer")
 
@@ -27,12 +28,15 @@ class WindowApplication(Tk):
         title.place(relx=0.5, rely=0.05, anchor='n')
 
         text1 = Label(frame, text="Select Member Parameter:")
-        text1.place(relx=0.02, rely=0.15, anchor='w')
+        text1.place(relx=0.02, rely=0.2, anchor='w')
 
-        dataOptions = ["2m Temperature: Min", "2m Temperature: Max", "2m Temperature: Mean", "2m Dewpoint: Mean"]
-        self.combo = ttk.Combobox(frame, values=dataOptions, state="readonly")
+        self.dataOptions = {"2m Temperature: Min": ("temp", "min"), 
+                            "2m Temperature: Max": ("temp", "min"), 
+                            "2m Temperature: Mean": ("temp", "min"), 
+                            }
+        self.combo = ttk.Combobox(frame, values=list(self.dataOptions.keys()), state="readonly")
         self.combo.set("Select a dataset...")
-        self.combo.place(relx=0.075, rely=0.25, anchor='w')
+        self.combo.place(relx=0.29, rely=0.2, anchor='w')
 
         self.combo.bind("<<ComboboxSelected>>", self.onSelect)
 
@@ -43,5 +47,5 @@ class WindowApplication(Tk):
         selectedItem = self.combo.get()
         print(f"Selected: '{selectedItem}'")
 
-appSetup = WindowApplication()
+appSetup = WindowApplication(outputs=outputs)
 appSetup.mainloop()

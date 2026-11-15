@@ -1,6 +1,8 @@
 # Model output handling and variable calculation
 import wget
 import os
+import xarray as xr
+
 date = int(input("Enter date in YYYYMMDD: "))
 run = int(input("Enter valid run time in HH: "))
 urlHRRR = {}
@@ -24,3 +26,4 @@ for i in range(len(urlHRRR)):
     wget.download(urlHRRR[f"url{i}"], out=f"gribs/HRRR_{date}_{run}_{i:02d}.grib2")
 for i in range(6, len(urlHRRRlag)):
     wget.download(urlHRRRlag[f"url{i}"], out=f"gribs/HRRR_{dateLag}_{runLag}_{i:02d}.grib2")
+    
